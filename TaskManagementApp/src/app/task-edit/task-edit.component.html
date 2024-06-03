@@ -1,1 +1,23 @@
-<p>task-edit works!</p>
+<mat-toolbar color="primary">
+    <span>Edit Task</span>
+  </mat-toolbar>
+  
+  <mat-card>
+    <form (ngSubmit)="updateTask()">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="task.title" name="title" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="task.description" name="description" required>
+      </mat-form-field>
+  
+      <mat-checkbox [(ngModel)]="task.completed" name="completed">Completed</mat-checkbox>
+  
+      <button mat-raised-button color="primary" type="submit">Update</button>
+      <button mat-raised-button color="warn" routerLink="/tasks">Cancel</button>
+    </form>
+  </mat-card>
+  

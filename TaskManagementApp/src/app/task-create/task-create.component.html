@@ -1,1 +1,21 @@
-<p>task-create works!</p>
+<mat-toolbar color="primary">
+    <span>Create Task</span>
+  </mat-toolbar>
+  
+  <mat-card>
+    <form (ngSubmit)="createTask()">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="task.title" name="title" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="task.description" name="description" required>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Create</button>
+      <button mat-raised-button color="warn" routerLink="/tasks">Cancel</button>
+    </form>
+  </mat-card>
+  

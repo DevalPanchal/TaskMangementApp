@@ -31,11 +31,35 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 
+app.UseCors("CorsPolicy");
+
 app.UseAuthorization();
 
 app.MapControllers();
 
+void SeedDatabase(WebApplication app)
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<TaskContext>();
+
+        // Add dummy tasks if the database is empty
+        if (!context.Tasks.Any())
+        {
+            context.Tasks.AddRange(
+                new Task { Title = "Task 1", Description = "Description 1", Completed = false },
+                new Task { Title = "Task 2", Description = "Description 2", Completed = true },
+                new Task { Title = "Task 3", Description = "Description 3", Completed = false }
+            );
+            context.SaveChanges();
+        }
+    }
+}
+
+SeedDatabase(app);
+
 app.Run();
+
 
 public partial class Program { }
 
@@ -123,3 +147,4 @@ public class TasksController : ControllerBase
         return NoContent();
     }
 }
+
